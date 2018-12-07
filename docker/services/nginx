@@ -1,0 +1,11 @@
+#!/bin/bash
+set -e
+# We ensure nginx-log-forwarder is running first so it catches the first log-lines
+sv restart /etc/service/nginx-log-forwarder
+
+# CUSTOM: Generate vhost file
+if [ -f /etc/nginx/nginx-vhost.conf.template ] ; then
+  envsubst < /etc/nginx/nginx-vhost.conf.template > /etc/nginx/sites-enabled/myapp
+fi
+
+exec /usr/sbin/nginx
