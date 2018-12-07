@@ -1,0 +1,13 @@
+server {
+    listen 80;
+    server_name www.example.com;  # this probably doesn't need to be changed
+    root /home/app/myapp/public;
+
+    passenger_enabled on;
+    passenger_user app;
+
+    passenger_ruby /usr/bin/ruby2.5;
+    passenger_env_var MYSQL_HOST '$MYSQL_HOST';
+    passenger_env_var REDIS_URL '$REDIS_URL';
+    passenger_env_var EMAIL_TEST_ADDRESS '$EMAIL_TEST_ADDRESS';
+}
