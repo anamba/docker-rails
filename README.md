@@ -12,6 +12,7 @@ Based on Phusion's excellent, developer-friendly [passenger-docker](https://gith
 Includes:
 
 * Ruby 2.5.3 + Rubygems 2.7.8
+* Ruby 2.6.0 + Rubygems 3.0.1
 * Passenger 6.0.0
 
 Working dir is `/home/app/myapp` (user is `app`).
@@ -73,7 +74,7 @@ You'll want to create aliases or simple shell scripts to save yourself some typi
 
 ```bash
 docker build -t anamba/rails-dev:latest .
-docker tag anamba/rails-dev:latest anamba/rails-dev:1.0.1
+docker tag anamba/rails-dev:latest anamba/rails-dev:1.0.1.1
 docker tag anamba/rails-dev:latest anamba/rails-dev:1.0
 docker push anamba/rails-dev
 ```
