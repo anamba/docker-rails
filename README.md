@@ -11,9 +11,9 @@ Based on Phusion's excellent, developer-friendly [passenger-docker](https://gith
 
 Includes:
 
-* Ruby 2.5.3 + Rubygems 2.7.8
-* Ruby 2.6.0 + Rubygems 3.0.1
-* Passenger 6.0.0
+* Ruby 2.5.3 + Rubygems 3.0.2
+* Ruby 2.6.1 + Rubygems 3.0.1
+* Passenger 6.0.2
 
 Working dir is `/home/app/myapp` (user is `app`).
 
@@ -38,24 +38,20 @@ services:
     volumes:
       - ./:/home/app/myapp:delegated               # NOTE: :delegated is a Docker for Mac feature
       - node_modules:/home/app/myapp/node_modules  # keep node_modules off your local filesystem
-      - log:/home/app/myapp/log                    # you may also want to keep log and tmp in volumes
-      - tmp:/home/app/myapp/tmp                    # (especially if your working copy is in Dropbox, etc.)
+      - /home/app/myapp/log                    # you may also want to keep log and tmp in volumes
+      - /home/app/myapp/tmp                    # (especially if your working copy is in Dropbox, etc.)
       - gems:/usr/local/rvm/gems                   # if you want to keep a single gem cache
   db:
-    image: mariadb:10.3
+    image: mariadb:10.4
     volumes:
-      - db-data:/var/lib/mysql
+      - /var/lib/mysql
     environment:
       MYSQL_ALLOW_EMPTY_PASSWORD: 1
 
   redis:
-    image: redis:4.0-32bit
+    image: redis:5.0-32bit
 
 volumes:
-  node_modules:
-  log:
-  tmp:
-  db-data:
   gems:
     external: true
 ```
@@ -74,7 +70,7 @@ You'll want to create aliases or simple shell scripts to save yourself some typi
 
 ```bash
 docker build -t anamba/rails-dev:latest .
-docker tag anamba/rails-dev:latest anamba/rails-dev:1.0.1.1
+docker tag anamba/rails-dev:latest anamba/rails-dev:1.0.3
 docker tag anamba/rails-dev:latest anamba/rails-dev:1.0
 docker push anamba/rails-dev
 ```
