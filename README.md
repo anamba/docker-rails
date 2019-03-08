@@ -11,8 +11,8 @@ Based on Phusion's excellent, developer-friendly [passenger-docker](https://gith
 
 Includes:
 
-* Ruby 2.5.3 + Rubygems 3.0.2
-* Ruby 2.6.1 + Rubygems 3.0.1
+* Ruby 2.5.3 + Rubygems 3.0.3 ([security release](https://blog.rubygems.org/2019/03/05/security-advisories-2019-03.html))
+* Ruby 2.6.1 + Rubygems 3.0.3 ([security release](https://blog.rubygems.org/2019/03/05/security-advisories-2019-03.html))
 * Passenger 6.0.2
 
 Working dir is `/home/app/myapp` (user is `app`).
@@ -37,9 +37,8 @@ services:
     image: anamba/rails-dev:1.0                    # latest 1.0.x version
     volumes:
       - ./:/home/app/myapp:delegated               # NOTE: :delegated is a Docker for Mac feature
-      - node_modules:/home/app/myapp/node_modules  # keep node_modules off your local filesystem
-      - /home/app/myapp/log                    # you may also want to keep log and tmp in volumes
-      - /home/app/myapp/tmp                    # (especially if your working copy is in Dropbox, etc.)
+      - /home/app/myapp/log                        # you probably want to keep log and tmp in volumes
+      - /home/app/myapp/tmp                        # (especially if your working copy is in Dropbox, etc.)
       - gems:/usr/local/rvm/gems                   # if you want to keep a single gem cache
   db:
     image: mariadb:10.4
@@ -58,8 +57,8 @@ volumes:
 
 From there, you can run `docker-compose up` to start the containers, then, in a separate terminal:
 ```bash
-docker-compose exec -u app web bash          # get a user shell
-docker-compose exec web bash                 # get a root shell
+docker-compose exec -u app web bash -l  # user login shell
+docker-compose exec web bash -l         # root login shell
 ```
 
 You'll want to create aliases or simple shell scripts to save yourself some typing.

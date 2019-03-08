@@ -16,7 +16,6 @@ RUN apt-get upgrade -y -o Dpkg::Options::="--force-confnew"
 # Install common dependencies
 RUN apt-get install -y nodejs yarn
 RUN apt-get install -y tzdata
-RUN apt-get install -y memcached
 RUN apt-get install -y gettext # for envsubst
 RUN apt-get autoremove -y
 
@@ -28,7 +27,7 @@ RUN gem install bundler:1.17.3 rake rack
 # Install ruby 2.6 as an alternative - from 2.6 on, do not install/update gems
 RUN /usr/local/rvm/bin/rvm get stable
 RUN /usr/local/rvm/bin/rvm install 2.6.1
-RUN /usr/local/rvm/bin/rvm use 2.6.1
+RUN bash -l -c 'rvm use 2.6.1 && gem update --system'
 
 # Enable nginx
 RUN rm -f /etc/service/nginx/down
