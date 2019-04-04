@@ -7,7 +7,11 @@ server {
     passenger_user app;
 
     passenger_ruby /usr/bin/ruby2.5;
+
     passenger_env_var MYSQL_HOST '$MYSQL_HOST';
     passenger_env_var REDIS_URL '$REDIS_URL';
-    passenger_env_var EMAIL_TEST_ADDRESS '$EMAIL_TEST_ADDRESS';
+
+    # copy to your project add/remove env vars as needed
+    # add to your Dockerfile:
+    # COPY /docker/conf/nginx-vhost.conf.template /etc/nginx/
 }

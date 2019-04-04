@@ -1,7 +1,7 @@
 ### Docker image for Rails development ###
 
-# See https://github.com/phusion/passenger-docker/blob/master/Changelog.md for a list of version numbers.
-FROM phusion/passenger-ruby25:1.0.3
+# See https://github.com/phusion/passenger-docker/blob/master/CHANGELOG.md for a list of version numbers.
+FROM phusion/passenger-full:1.0.5
 LABEL maintainer="bbsoftware@biggerbird.com"
 
 # Set up 3rd party repos
@@ -19,21 +19,20 @@ RUN apt-get install -y tzdata
 RUN apt-get install -y gettext # for envsubst
 RUN apt-get autoremove -y
 
-# Update rubygems, install most common gems
-WORKDIR /home/app/myapp
-RUN gem update --system
-RUN gem install bundler:1.17.3 rake rack
-
-# Install ruby 2.6 as an alternative - from 2.6 on, do not install/update gems
+# Update rvm
 RUN /usr/local/rvm/bin/rvm get stable
-RUN /usr/local/rvm/bin/rvm install 2.6.1
-RUN bash -l -c 'rvm use 2.6.1 && gem update --system'
+
+# Update rubygems (https://blog.rubygems.org/2019/03/05/security-advisories-2019-03.html)
+RUN bash -l -c "rvm use 2.6.2 --create && gem update --system"
+RUN bash -l -c "rvm use 2.5.5 --create && gem update --system"
+RUN bash -l -c "rvm use 2.4.5 --create && gem update --system"
+RUN bash -l -c "rvm use 2.3.8 --create && gem update --system"
 
 # Enable nginx
 RUN rm -f /etc/service/nginx/down
 COPY docker/services/nginx /etc/service/nginx/run
 
-# Helpful startup scripts
+# Helpful startup scripts (you can rm them in your own Dockerfile if you don't need them)
 RUN mkdir -p /etc/my_init.d
 COPY docker/startup/101_mkdir.sh /etc/my_init.d/
 COPY docker/startup/201_bundler.sh /etc/my_init.d/
@@ -41,10 +40,11 @@ COPY docker/startup/211_yarn.sh /etc/my_init.d/
 
 # Post-build clean up
 RUN apt-get clean && rm -rf /tmp/* /var/tmp/*
-# RUN rm -rf /var/lib/apt/lists/*
 
 # Expose port 80 to the Docker host, so we can access it from the outside (remember to publish it using `docker run -p`).
 EXPOSE 80
+
+WORKDIR /home/app/myapp
 
 # Run this to start all services (if no command was provided to `docker run`)
 CMD ["/sbin/my_init"]

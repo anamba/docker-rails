@@ -11,8 +11,11 @@ Based on Phusion's excellent, developer-friendly [passenger-docker](https://gith
 
 Includes:
 
-* Ruby 2.5.3 + Rubygems 3.0.3 ([security release](https://blog.rubygems.org/2019/03/05/security-advisories-2019-03.html))
-* Ruby 2.6.1 + Rubygems 3.0.3 ([security release](https://blog.rubygems.org/2019/03/05/security-advisories-2019-03.html))
+* Ruby 2.6.2 + Rubygems 3.0.3 ([security release](https://blog.rubygems.org/2019/03/05/security-advisories-2019-03.html))
+* Ruby 2.5.5 + Rubygems 3.0.3
+* Ruby 2.4.5 + Rubygems 3.0.3
+* Ruby 2.3.8 + Rubygems 3.0.3
+* Node 10
 * Passenger 6.0.2
 
 Working dir is `/home/app/myapp` (user is `app`).
@@ -23,8 +26,9 @@ Tracks passenger-docker versions.
 
 ## How to use
 
-Add to Dockerfile (optional):
+Add to nginx vhost steps to Dockerfile (optional):
 ```
+RUN rm -f /etc/nginx/sites-enabled/default
 COPY /docker/conf/nginx-vhost.conf.template /etc/nginx/
 ```
 
@@ -34,7 +38,7 @@ version: '3'
 
 services:
   web:
-    image: anamba/rails-dev:1.0                    # latest 1.0.x version
+    image: anamba/rails-dev:1.0
     volumes:
       - ./:/home/app/myapp:delegated               # NOTE: :delegated is a Docker for Mac feature
       - /home/app/myapp/log                        # you probably want to keep log and tmp in volumes
@@ -69,7 +73,7 @@ You'll want to create aliases or simple shell scripts to save yourself some typi
 
 ```bash
 docker build -t anamba/rails-dev:latest .
-docker tag anamba/rails-dev:latest anamba/rails-dev:1.0.3
+docker tag anamba/rails-dev:latest anamba/rails-dev:1.0.5
 docker tag anamba/rails-dev:latest anamba/rails-dev:1.0
 docker push anamba/rails-dev
 ```
