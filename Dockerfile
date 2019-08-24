@@ -1,7 +1,5 @@
-### Docker image for Rails development ###
-
 # See https://github.com/phusion/passenger-docker/blob/master/CHANGELOG.md for a list of version numbers.
-FROM phusion/passenger-full:1.0.5
+FROM phusion/passenger-full:1.0.6
 LABEL maintainer="bbsoftware@biggerbird.com"
 
 # Set up 3rd party repos
@@ -23,9 +21,9 @@ RUN apt-get autoremove -y
 RUN /usr/local/rvm/bin/rvm get stable
 
 # Update rubygems (https://blog.rubygems.org/2019/03/05/security-advisories-2019-03.html)
-RUN bash -l -c "rvm use 2.6.2 --create && gem update --system"
+RUN bash -l -c "rvm use 2.6.3 --create && gem update --system"
 RUN bash -l -c "rvm use 2.5.5 --create && gem update --system"
-RUN bash -l -c "rvm use 2.4.5 --create && gem update --system"
+RUN bash -l -c "rvm use 2.4.6 --create && gem update --system"
 RUN bash -l -c "rvm use 2.3.8 --create && gem update --system"
 
 # Enable nginx
