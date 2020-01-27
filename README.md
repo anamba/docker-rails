@@ -5,18 +5,20 @@
 
 Docker Hub: [anamba/rails-dev](https://hub.docker.com/r/anamba/rails-dev/)
 
-Based on Phusion's excellent, developer-friendly [passenger-docker](https://github.com/phusion/passenger-docker) image (based on 18.04 LTS aka Bionic).
+Based on Phusion's excellent, developer-friendly [passenger-docker](https://github.com/phusion/passenger-docker) image (based on 18.04 LTS aka Bionic). Includes fullstaq ruby, which offers improved performance and reduced memory usage.
 
 ## Contents
 
 Includes:
 
-* Ruby 2.6.3 + Rubygems 3.0.3 ([security release](https://blog.rubygems.org/2019/03/05/security-advisories-2019-03.html))
-* Ruby 2.5.5 + Rubygems 3.0.3
-* Ruby 2.4.6 + Rubygems 3.0.3
-* Ruby 2.3.8 + Rubygems 3.0.3
-* Node 10
-* Passenger 6.0.2
+* rvm 1.29.9
+* Passenger 6.0.4
+* Fullstaq Ruby 2.6.5
+* MRI Ruby 2.6.5 + Rubygems 3.1.2
+* MRI Ruby 2.5.7 + Rubygems 3.1.2
+* MRI Ruby 2.4.9 + Rubygems 3.1.2
+* MRI Ruby 2.3.8 + Rubygems 3.1.2
+* Node 12.x
 
 Working dir is `/home/app/myapp` (user is `app`).
 
@@ -73,7 +75,7 @@ You'll want to create aliases or simple shell scripts to save yourself some typi
 
 ```bash
 docker build -t anamba/rails-dev:latest .
-docker tag anamba/rails-dev:latest anamba/rails-dev:1.0.6
+docker tag anamba/rails-dev:latest anamba/rails-dev:1.0.9
 docker tag anamba/rails-dev:latest anamba/rails-dev:1.0
 docker push anamba/rails-dev
 ```

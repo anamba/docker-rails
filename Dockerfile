@@ -1,9 +1,9 @@
 # See https://github.com/phusion/passenger-docker/blob/master/CHANGELOG.md for a list of version numbers.
-FROM phusion/passenger-full:1.0.6
+FROM phusion/passenger-full:1.0.9
 LABEL maintainer="bbsoftware@biggerbird.com"
 
 # Set up 3rd party repos
-RUN curl -sL https://deb.nodesource.com/setup_10.x | bash -
+RUN curl -sL https://deb.nodesource.com/setup_12.x | bash -
 RUN curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add -
 RUN echo "deb https://dl.yarnpkg.com/debian/ stable main" > /etc/apt/sources.list.d/yarn.list
 RUN apt-get update
@@ -19,12 +19,19 @@ RUN apt-get autoremove -y
 
 # Update rvm
 RUN /usr/local/rvm/bin/rvm get stable
+RUN /usr/local/rvm/bin/rvm cleanup all
 
-# Update rubygems (https://blog.rubygems.org/2019/03/05/security-advisories-2019-03.html)
-RUN bash -l -c "rvm use 2.6.3 --create && gem update --system"
-RUN bash -l -c "rvm use 2.5.5 --create && gem update --system"
-RUN bash -l -c "rvm use 2.4.6 --create && gem update --system"
+# Update rubygems
+RUN bash -l -c "rvm use 2.6.5 --create && gem update --system"
+RUN bash -l -c "rvm use 2.5.7 --create && gem update --system"
+RUN bash -l -c "rvm use 2.4.9 --create && gem update --system"
 RUN bash -l -c "rvm use 2.3.8 --create && gem update --system"
+
+# Add fullstaq ruby repo and install ruby2.6
+RUN curl -sSL https://raw.githubusercontent.com/fullstaq-labs/fullstaq-ruby-server-edition/master/fullstaq-ruby.asc | apt-key add -
+RUN echo "deb https://apt.fullstaqruby.org ubuntu-18.04 main" > /etc/apt/sources.list.d/fullstaq-ruby.list
+RUN apt-get update
+RUN apt-get install -y fullstaq-ruby-2.6-jemalloc
 
 # Enable nginx
 RUN rm -f /etc/service/nginx/down
