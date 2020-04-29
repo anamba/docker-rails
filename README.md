@@ -11,20 +11,20 @@ Based on Phusion's excellent, developer-friendly [passenger-docker](https://gith
 
 Includes:
 
-* rvm 1.29.9
+* rvm 1.29.10
 * Passenger 6.0.4
 * Fullstaq Ruby 2.6.5
-* MRI Ruby 2.6.5 + Rubygems 3.1.2
-* MRI Ruby 2.5.7 + Rubygems 3.1.2
-* MRI Ruby 2.4.9 + Rubygems 3.1.2
-* MRI Ruby 2.3.8 + Rubygems 3.1.2
-* Node 12.x
+* MRI Ruby 2.7.1 + Rubygems 3.1.2
+* MRI Ruby 2.6.6 + Rubygems 3.1.2
+* MRI Ruby 2.5.8 + Rubygems 3.1.2
+* MRI Ruby 2.4.10 + Rubygems 3.1.2
+* Node 12.x + yarn
 
 Working dir is `/home/app/myapp` (user is `app`).
 
 ## Versioning
 
-Tracks passenger-docker versions.
+Note: Versioning originally followed passenger-docker, but no longer. Bumped version to 1.1 due to addition of Ruby 2.7 and removal of 2.3, along with the inclusion of bundler (latest) by default.
 
 ## How to use
 
@@ -40,7 +40,7 @@ version: '3'
 
 services:
   web:
-    image: anamba/rails-dev:1.0
+    image: anamba/rails-dev:1.1
     volumes:
       - ./:/home/app/myapp:delegated               # NOTE: :delegated is a Docker for Mac feature
       - /home/app/myapp/log                        # you probably want to keep log and tmp in volumes
@@ -75,7 +75,7 @@ You'll want to create aliases or simple shell scripts to save yourself some typi
 
 ```bash
 docker build -t anamba/rails-dev:latest .
-docker tag anamba/rails-dev:latest anamba/rails-dev:1.0.9
-docker tag anamba/rails-dev:latest anamba/rails-dev:1.0
+docker tag anamba/rails-dev:latest anamba/rails-dev:1.1.0
+docker tag anamba/rails-dev:latest anamba/rails-dev:1.1
 docker push anamba/rails-dev
 ```

@@ -22,10 +22,10 @@ RUN /usr/local/rvm/bin/rvm get stable
 RUN /usr/local/rvm/bin/rvm cleanup all
 
 # Update rubygems
-RUN bash -l -c "rvm use 2.6.5 --create && gem update --system"
-RUN bash -l -c "rvm use 2.5.7 --create && gem update --system"
-RUN bash -l -c "rvm use 2.4.9 --create && gem update --system"
-RUN bash -l -c "rvm use 2.3.8 --create && gem update --system"
+RUN bash -l -c "rvm use 2.7.1 --install --create && gem update --system && gem install bundler"
+RUN bash -l -c "rvm use 2.6.6 --install --create && gem update --system && gem install bundler"
+RUN bash -l -c "rvm use 2.5.8 --install --create && gem update --system && gem install bundler"
+RUN bash -l -c "rvm use 2.4.10 --install --create && gem update --system && gem install bundler"
 
 # Add fullstaq ruby repo and install ruby2.6
 RUN curl -sSL https://raw.githubusercontent.com/fullstaq-labs/fullstaq-ruby-server-edition/master/fullstaq-ruby.asc | apt-key add -
