@@ -1,5 +1,5 @@
 # See https://github.com/phusion/passenger-docker/blob/master/CHANGELOG.md for a list of version numbers.
-FROM phusion/passenger-full:1.0.9
+FROM phusion/passenger-full:1.0.11
 LABEL maintainer="bbsoftware@biggerbird.com"
 
 # Set up 3rd party repos
@@ -13,7 +13,7 @@ RUN apt-get upgrade -y -o Dpkg::Options::="--force-confnew"
 
 # Install common dependencies
 RUN apt-get install -y nodejs yarn
-RUN apt-get install -y tzdata
+RUN apt-get install -y mysql-client tzdata
 RUN apt-get install -y gettext # for envsubst
 RUN apt-get autoremove -y
 
@@ -28,10 +28,10 @@ RUN bash -l -c "rvm use 2.5.8 --install --create && gem update --system && gem i
 RUN bash -l -c "rvm use 2.4.10 --install --create && gem update --system && gem install bundler"
 
 # Add fullstaq ruby repo and install ruby2.6
-RUN curl -sSL https://raw.githubusercontent.com/fullstaq-labs/fullstaq-ruby-server-edition/master/fullstaq-ruby.asc | apt-key add -
+RUN curl -sSL https://raw.githubusercontent.com/fullstaq-labs/fullstaq-ruby-server-edition/main/fullstaq-ruby.asc | apt-key add -
 RUN echo "deb https://apt.fullstaqruby.org ubuntu-18.04 main" > /etc/apt/sources.list.d/fullstaq-ruby.list
 RUN apt-get update
-RUN apt-get install -y fullstaq-ruby-2.6-jemalloc
+RUN apt-get install -y fullstaq-ruby-2.6-jemalloc fullstaq-ruby-2.7-jemalloc
 
 # Enable nginx
 RUN rm -f /etc/service/nginx/down

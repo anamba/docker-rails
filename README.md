@@ -12,12 +12,13 @@ Based on Phusion's excellent, developer-friendly [passenger-docker](https://gith
 Includes:
 
 * rvm 1.29.10
-* Passenger 6.0.4
-* Fullstaq Ruby 2.6.5
+* Passenger 6.0.6
 * MRI Ruby 2.7.1 + Rubygems 3.1.2
 * MRI Ruby 2.6.6 + Rubygems 3.1.2
 * MRI Ruby 2.5.8 + Rubygems 3.1.2
 * MRI Ruby 2.4.10 + Rubygems 3.1.2
+* Fullstaq Ruby 2.7.1
+* Fullstaq Ruby 2.6.6
 * Node 12.x + yarn
 
 Working dir is `/home/app/myapp` (user is `app`).
@@ -42,12 +43,12 @@ services:
   web:
     image: anamba/rails-dev:1.1
     volumes:
-      - ./:/home/app/myapp:delegated               # NOTE: :delegated is a Docker for Mac feature
+      - ./:/home/app/myapp
       - /home/app/myapp/log                        # you probably want to keep log and tmp in volumes
       - /home/app/myapp/tmp                        # (especially if your working copy is in Dropbox, etc.)
       - gems:/usr/local/rvm/gems                   # if you want to keep a single gem cache
   db:
-    image: mariadb:10.4
+    image: mysql:8.0
     volumes:
       - /var/lib/mysql
     environment:
@@ -75,7 +76,7 @@ You'll want to create aliases or simple shell scripts to save yourself some typi
 
 ```bash
 docker build -t anamba/rails-dev:latest .
-docker tag anamba/rails-dev:latest anamba/rails-dev:1.1.0
+docker tag anamba/rails-dev:latest anamba/rails-dev:1.1.1
 docker tag anamba/rails-dev:latest anamba/rails-dev:1.1
 docker push anamba/rails-dev
 ```
