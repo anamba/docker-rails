@@ -5,7 +5,8 @@ sv restart /etc/service/nginx-log-forwarder
 
 # CUSTOM: Generate vhost file
 if [ -f /etc/nginx/nginx-vhost.conf.template ] ; then
-  envsubst < /etc/nginx/nginx-vhost.conf.template > /etc/nginx/sites-enabled/myapp
+  # workaround to keep $PORT intact in passenger_app_start_command
+  PORT='$PORT' envsubst < /etc/nginx/nginx-vhost.conf.template > /etc/nginx/sites-enabled/myapp
 fi
 
 exec /usr/sbin/nginx

@@ -5,27 +5,31 @@
 
 Docker Hub: [anamba/rails-dev](https://hub.docker.com/r/anamba/rails-dev/)
 
-Based on Phusion's excellent, developer-friendly [passenger-docker](https://github.com/phusion/passenger-docker) image (based on 18.04 LTS aka Bionic). Includes fullstaq ruby, which offers improved performance and reduced memory usage.
+Based on Phusion's excellent, developer-friendly [passenger-docker](https://github.com/phusion/passenger-docker) image (based on 20.04 LTS aka Focal). Includes fullstaq ruby, which offers improved performance and reduced memory usage.
 
 ## Contents
 
 Includes:
 
 * rvm 1.29.10
-* Passenger 6.0.6
-* MRI Ruby 2.7.1 + Rubygems 3.1.2
+* Passenger 6.0.7
+* MRI Ruby 2.7.2 + Rubygems 3.1.2
 * MRI Ruby 2.6.6 + Rubygems 3.1.2
 * MRI Ruby 2.5.8 + Rubygems 3.1.2
 * MRI Ruby 2.4.10 + Rubygems 3.1.2
-* Fullstaq Ruby 2.7.1
+* Fullstaq Ruby 2.7.2
 * Fullstaq Ruby 2.6.6
-* Node 12.x + yarn
+* Node 14 LTS + yarn
 
 Working dir is `/home/app/myapp` (user is `app`).
 
 ## Versioning
 
-Note: Versioning originally followed passenger-docker, but no longer. Bumped version to 1.1 due to addition of Ruby 2.7 and removal of 2.3, along with the inclusion of bundler (latest) by default.
+Versioning originally followed passenger-docker, but no longer.
+
+1.2: Bionic -> Focal; Node 12 -> 14
+1.1: Added Ruby 2.7, removed 2.3; includes latest bundler out of the box
+1.0: Original release
 
 ## How to use
 
@@ -55,7 +59,7 @@ services:
       MYSQL_ALLOW_EMPTY_PASSWORD: 1
 
   redis:
-    image: redis:5.0-32bit
+    image: redis:6.0-alpine
 
 volumes:
   gems:
@@ -76,7 +80,7 @@ You'll want to create aliases or simple shell scripts to save yourself some typi
 
 ```bash
 docker build -t anamba/rails-dev:latest .
-docker tag anamba/rails-dev:latest anamba/rails-dev:1.1.1
-docker tag anamba/rails-dev:latest anamba/rails-dev:1.1
+docker tag anamba/rails-dev:latest anamba/rails-dev:1.2.0
+docker tag anamba/rails-dev:latest anamba/rails-dev:1.2
 docker push anamba/rails-dev
 ```
