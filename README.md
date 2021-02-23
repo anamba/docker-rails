@@ -7,16 +7,21 @@ Docker Hub: [anamba/rails-dev](https://hub.docker.com/r/anamba/rails-dev/)
 
 Based on Phusion's excellent, developer-friendly [passenger-docker](https://github.com/phusion/passenger-docker) image (based on 20.04 LTS aka Focal). Includes fullstaq ruby, which offers improved performance and reduced memory usage.
 
+Primary use cases:
+
+* CI (e.g. Bitbucket Pipelines)
+* Local development, VS Code Dev Containers
+
 ## Contents
 
 Includes:
 
-* rvm 1.29.10
+* rvm 1.29.12
 * Passenger 6.0.7
-* MRI Ruby 2.7.2 + Rubygems 3.1.2
-* MRI Ruby 2.6.6 + Rubygems 3.1.2
-* MRI Ruby 2.5.8 + Rubygems 3.1.2
-* MRI Ruby 2.4.10 + Rubygems 3.1.2
+* MRI Ruby 2.7.2 + Rubygems 3.2.11
+* MRI Ruby 2.6.6 + Rubygems 3.2.11
+* MRI Ruby 2.5.8 + Rubygems 3.2.11
+* MRI Ruby 2.4.10 + Rubygems 3.2.11
 * Fullstaq Ruby 2.7.2
 * Fullstaq Ruby 2.6.6
 * Node 14 LTS + yarn
@@ -45,7 +50,7 @@ version: '3'
 
 services:
   web:
-    image: anamba/rails-dev:1.1
+    image: anamba/rails-dev:1.2
     volumes:
       - ./:/home/app/myapp
       - /home/app/myapp/log                        # you probably want to keep log and tmp in volumes
@@ -80,7 +85,7 @@ You'll want to create aliases or simple shell scripts to save yourself some typi
 
 ```bash
 docker build -t anamba/rails-dev:latest .
-docker tag anamba/rails-dev:latest anamba/rails-dev:1.2.0
+docker tag anamba/rails-dev:latest anamba/rails-dev:1.2.1
 docker tag anamba/rails-dev:latest anamba/rails-dev:1.2
 docker push anamba/rails-dev
 ```
