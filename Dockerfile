@@ -13,7 +13,7 @@ RUN apt-get upgrade -y -o Dpkg::Options::="--force-confnew"
 
 # Install common dependencies
 RUN apt-get install -y nodejs yarn
-RUN apt-get install -y mysql-client tzdata
+RUN apt-get install -y mysql-client shared-mime-info tzdata
 RUN apt-get install -y gettext # for envsubst
 RUN apt-get autoremove -y
 
