@@ -22,16 +22,16 @@ RUN /usr/local/rvm/bin/rvm get stable
 RUN /usr/local/rvm/bin/rvm cleanup all
 
 # Update rubygems and install/update bundler
-RUN bash -l -c "rvm use 2.7.2 --install --create && gem update --system && gem install bundler"
-RUN bash -l -c "rvm use 2.6.6 --install --create && gem update --system && gem install bundler"
-RUN bash -l -c "rvm use 2.5.8 --install --create && gem update --system && gem install bundler"
-RUN bash -l -c "rvm use 2.4.10 --install --create && gem update --system && gem install bundler"
+RUN bash -l -c "rvm use 3.0.1 --install --create && gem update --system && gem install bundler"
+RUN bash -l -c "rvm use 2.7.3 --install --create && gem update --system && gem install bundler"
+RUN bash -l -c "rvm use 2.6.7 --install --create && gem update --system && gem install bundler"
+RUN bash -l -c "rvm use 2.5.9 --install --create && gem update --system && gem install bundler"
 
-# Add fullstaq ruby repo and install ruby2.6/2.7
+# Add fullstaq ruby repo and install ruby2.6/2.7/3.0
 RUN curl -sSL https://raw.githubusercontent.com/fullstaq-labs/fullstaq-ruby-server-edition/main/fullstaq-ruby.asc | apt-key add -
 RUN echo "deb https://apt.fullstaqruby.org ubuntu-20.04 main" > /etc/apt/sources.list.d/fullstaq-ruby.list
 RUN apt-get update
-RUN apt-get install -y fullstaq-ruby-2.6.6-jemalloc fullstaq-ruby-2.7.2-jemalloc
+RUN apt-get install -y fullstaq-ruby-2.6.7-jemalloc fullstaq-ruby-2.7.3-jemalloc fullstaq-ruby-3.0.1-jemalloc
 
 # Enable nginx
 RUN rm -f /etc/service/nginx/down
