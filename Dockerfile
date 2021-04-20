@@ -1,5 +1,5 @@
 # See https://github.com/phusion/passenger-docker/blob/master/CHANGELOG.md for a list of version numbers.
-FROM phusion/passenger-full:1.0.12
+FROM phusion/passenger-full:1.0.13
 LABEL maintainer="bbsoftware@biggerbird.com"
 
 # Set up 3rd party repos
@@ -31,7 +31,7 @@ RUN bash -l -c "rvm use 2.4.10 --install --create && gem update --system && gem 
 RUN curl -sSL https://raw.githubusercontent.com/fullstaq-labs/fullstaq-ruby-server-edition/main/fullstaq-ruby.asc | apt-key add -
 RUN echo "deb https://apt.fullstaqruby.org ubuntu-20.04 main" > /etc/apt/sources.list.d/fullstaq-ruby.list
 RUN apt-get update
-RUN apt-get install -y fullstaq-ruby-2.6-jemalloc fullstaq-ruby-2.7-jemalloc
+RUN apt-get install -y fullstaq-ruby-2.6.6-jemalloc fullstaq-ruby-2.7.2-jemalloc
 
 # Enable nginx
 RUN rm -f /etc/service/nginx/down

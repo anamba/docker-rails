@@ -16,15 +16,15 @@ Primary use cases:
 
 Includes:
 
-* rvm 1.29.12
-* Passenger 6.0.7
 * MRI Ruby 2.7.2 + Rubygems 3.2.11
 * MRI Ruby 2.6.6 + Rubygems 3.2.11
 * MRI Ruby 2.5.8 + Rubygems 3.2.11
 * MRI Ruby 2.4.10 + Rubygems 3.2.11
 * Fullstaq Ruby 2.7.2
 * Fullstaq Ruby 2.6.6
+* Passenger 6.0.8
 * Node 14 LTS + yarn
+* rvm stable
 
 Working dir is `/home/app/myapp` (user is `app`).
 
@@ -85,7 +85,7 @@ You'll want to create aliases or simple shell scripts to save yourself some typi
 
 ```bash
 docker build -t anamba/rails-dev:latest .
-docker tag anamba/rails-dev:latest anamba/rails-dev:1.2.2
+docker tag anamba/rails-dev:latest anamba/rails-dev:1.2.3
 docker tag anamba/rails-dev:latest anamba/rails-dev:1.2
 docker push -a anamba/rails-dev
 ```
