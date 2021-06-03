@@ -1,9 +1,9 @@
 # See https://github.com/phusion/passenger-docker/blob/master/CHANGELOG.md for a list of version numbers.
-FROM phusion/passenger-full:1.0.13
+FROM phusion/passenger-full:1.0.15
 LABEL maintainer="bbsoftware@biggerbird.com"
 
 # Set up 3rd party repos
-# RUN curl -sL https://deb.nodesource.com/setup_14.x | bash -
+RUN curl -sL https://deb.nodesource.com/setup_16.x | bash -
 RUN curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add -
 RUN echo "deb https://dl.yarnpkg.com/debian/ stable main" > /etc/apt/sources.list.d/yarn.list
 RUN apt-get update
@@ -39,9 +39,9 @@ COPY docker/services/nginx /etc/service/nginx/run
 
 # Helpful startup scripts (you can rm them in your own Dockerfile if you don't need them)
 RUN mkdir -p /etc/my_init.d
-COPY docker/startup/101_mkdir.sh /etc/my_init.d/
-COPY docker/startup/201_bundler.sh /etc/my_init.d/
-COPY docker/startup/211_yarn.sh /etc/my_init.d/
+COPY docker/startup/101_mkdir_chown.sh /etc/my_init.d/
+# COPY docker/startup/201_bundler.sh /etc/my_init.d/
+# COPY docker/startup/211_yarn.sh /etc/my_init.d/
 
 # Post-build clean up
 RUN apt-get clean && rm -rf /tmp/* /var/tmp/*

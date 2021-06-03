@@ -23,8 +23,8 @@ Includes:
 * Fullstaq Ruby 3.0.1
 * Fullstaq Ruby 2.7.3
 * Fullstaq Ruby 2.6.7
-* Passenger 6.0.8
-* Node 14 LTS + yarn
+* Passenger 6.0.9
+* Node 16 LTS + yarn
 * rvm stable
 
 Working dir is `/home/app/myapp` (user is `app`).
@@ -33,7 +33,7 @@ Working dir is `/home/app/myapp` (user is `app`).
 
 Versioning originally followed passenger-docker, but no longer.
 
-1.3: Added Ruby 3.0, removed 2.4
+1.3: Added Ruby 3.0, removed 2.4; Node 14 -> 16
 1.2: Bionic -> Focal; Node 12 -> 14
 1.1: Added Ruby 2.7, removed 2.3; includes latest bundler out of the box
 1.0: Original release
@@ -87,7 +87,7 @@ You'll want to create aliases or simple shell scripts to save yourself some typi
 
 ```bash
 docker build -t anamba/rails-dev:latest .
-docker tag anamba/rails-dev:latest anamba/rails-dev:1.3.0
+docker tag anamba/rails-dev:latest anamba/rails-dev:1.3.1
 docker tag anamba/rails-dev:latest anamba/rails-dev:1.3
 docker push -a anamba/rails-dev
 ```
