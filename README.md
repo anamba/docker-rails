@@ -16,15 +16,15 @@ Primary use cases:
 
 Includes:
 
-* MRI Ruby 3.0.1 + Rubygems 3.2.16
-* MRI Ruby 2.7.3 + Rubygems 3.2.16
-* MRI Ruby 2.6.7 + Rubygems 3.2.16
-* MRI Ruby 2.5.9 + Rubygems 3.2.16
-* Fullstaq Ruby 3.0.1
-* Fullstaq Ruby 2.7.3
-* Fullstaq Ruby 2.6.7
-* Passenger 6.0.9
-* Node 16 LTS + yarn
+* MRI Ruby 3.0.2 + Rubygems 3.2.27
+* MRI Ruby 2.7.4 + Rubygems 3.2.27
+* MRI Ruby 2.6.8 + Rubygems 3.2.27
+* MRI Ruby 2.5.9 + Rubygems 3.2.27 (note: EOL)
+* Fullstaq Ruby 3.0.2
+* Fullstaq Ruby 2.7.4
+* Fullstaq Ruby 2.6.8
+* Passenger 6.0.10
+* Node 16 + yarn
 * rvm stable
 
 Working dir is `/home/app/myapp` (user is `app`).
@@ -86,8 +86,8 @@ You'll want to create aliases or simple shell scripts to save yourself some typi
 (notes for myself)
 
 ```bash
-docker build -t anamba/rails-dev:latest .
-docker tag anamba/rails-dev:latest anamba/rails-dev:1.3.1
+docker build --no-cache -t anamba/rails-dev:latest .
+docker tag anamba/rails-dev:latest anamba/rails-dev:1.3.3
 docker tag anamba/rails-dev:latest anamba/rails-dev:1.3
-docker push -a anamba/rails-dev
+docker push anamba/rails-dev
 ```
