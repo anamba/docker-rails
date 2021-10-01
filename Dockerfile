@@ -3,6 +3,7 @@ FROM phusion/passenger-full:1.0.19
 LABEL maintainer="bbsoftware@biggerbird.com"
 
 # Set up 3rd party repos
+RUN apt-get update; apt-get install ca-certificates
 RUN curl -sL https://deb.nodesource.com/setup_16.x | bash -
 RUN curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add -
 RUN echo "deb https://dl.yarnpkg.com/debian/ stable main" > /etc/apt/sources.list.d/yarn.list

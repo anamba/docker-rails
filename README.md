@@ -87,7 +87,7 @@ You'll want to create aliases or simple shell scripts to save yourself some typi
 
 ```bash
 docker build --no-cache -t anamba/rails-dev:latest .
-docker tag anamba/rails-dev:latest anamba/rails-dev:1.3.3
+docker tag anamba/rails-dev:latest anamba/rails-dev:1.3.4
 docker tag anamba/rails-dev:latest anamba/rails-dev:1.3
 docker push anamba/rails-dev
 ```
