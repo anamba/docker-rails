@@ -16,14 +16,15 @@ Primary use cases:
 
 Includes:
 
-* MRI Ruby 3.0.2 + Rubygems 3.2.27
-* MRI Ruby 2.7.4 + Rubygems 3.2.27
-* MRI Ruby 2.6.8 + Rubygems 3.2.27
-* MRI Ruby 2.5.9 + Rubygems 3.2.27 (note: EOL)
-* Fullstaq Ruby 3.0.2
-* Fullstaq Ruby 2.7.4
-* Fullstaq Ruby 2.6.8
-* Passenger 6.0.10
+* MRI Ruby 3.1.0 + Rubygems 3.3.5
+* MRI Ruby 3.0.3 + Rubygems 3.3.5
+* MRI Ruby 2.7.5 + Rubygems 3.3.5
+* MRI Ruby 2.6.9 + Rubygems 3.3.5
+* Fullstaq Ruby 3.1.0
+* Fullstaq Ruby 3.0.3
+* Fullstaq Ruby 2.7.5
+* Fullstaq Ruby 2.6.9
+* Passenger 6.0.12
 * Node 16 + yarn
 * rvm stable
 
@@ -33,6 +34,7 @@ Working dir is `/home/app/myapp` (user is `app`).
 
 Versioning originally followed passenger-docker, but no longer.
 
+1.4: Added Ruby 3.1, removed 2.5
 1.3: Added Ruby 3.0, removed 2.4; Node 14 -> 16
 1.2: Bionic -> Focal; Node 12 -> 14
 1.1: Added Ruby 2.7, removed 2.3; includes latest bundler out of the box
@@ -52,7 +54,7 @@ version: '3'
 
 services:
   web:
-    image: anamba/rails-dev:1.3
+    image: anamba/rails-dev:1.4
     volumes:
       - ./:/home/app/myapp
       - /home/app/myapp/log                        # you probably want to keep log and tmp in volumes
@@ -62,11 +64,9 @@ services:
     image: mysql:8.0
     volumes:
       - /var/lib/mysql
-    environment:
-      MYSQL_ALLOW_EMPTY_PASSWORD: 1
 
   redis:
-    image: redis:6.0-alpine
+    image: redis:6.0
 
 volumes:
   gems:
@@ -87,7 +87,7 @@ You'll want to create aliases or simple shell scripts to save yourself some typi
 
 ```bash
 docker build --no-cache -t anamba/rails-dev:latest .
-docker tag anamba/rails-dev:latest anamba/rails-dev:1.3.4
-docker tag anamba/rails-dev:latest anamba/rails-dev:1.3
+docker tag anamba/rails-dev:latest anamba/rails-dev:1.4.0
+docker tag anamba/rails-dev:latest anamba/rails-dev:1.4
 docker push anamba/rails-dev
 ```

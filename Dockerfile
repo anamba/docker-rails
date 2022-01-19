@@ -1,5 +1,5 @@
 # See https://github.com/phusion/passenger-docker/blob/master/CHANGELOG.md for a list of version numbers.
-FROM phusion/passenger-full:1.0.19
+FROM phusion/passenger-full:2.0.1
 LABEL maintainer="bbsoftware@biggerbird.com"
 
 # Set up 3rd party repos
@@ -23,16 +23,16 @@ RUN /usr/local/rvm/bin/rvm get stable
 RUN /usr/local/rvm/bin/rvm cleanup all
 
 # Update rubygems and install/update bundler
-RUN bash -l -c "rvm use 3.0.2 && gem update --system && gem install bundler"
-RUN bash -l -c "rvm use 2.7.4 && gem update --system && gem install bundler"
-RUN bash -l -c "rvm use 2.6.8 && gem update --system && gem install bundler"
-RUN bash -l -c "rvm use 2.5.9 && gem update --system && gem install bundler"
+RUN bash -l -c "rvm use 3.1.0 --install && gem update --system && gem install bundler"
+RUN bash -l -c "rvm use 3.0.3 --install && gem update --system && gem install bundler"
+RUN bash -l -c "rvm use 2.7.5 --install && gem update --system && gem install bundler"
+RUN bash -l -c "rvm use 2.6.9 --install && gem update --system && gem install bundler"
 
 # Add fullstaq ruby repo and install ruby2.6/2.7/3.0
 RUN curl -sSL https://raw.githubusercontent.com/fullstaq-labs/fullstaq-ruby-server-edition/main/fullstaq-ruby.asc | apt-key add -
 RUN echo "deb https://apt.fullstaqruby.org ubuntu-20.04 main" > /etc/apt/sources.list.d/fullstaq-ruby.list
 RUN apt-get update
-RUN apt-get install -y fullstaq-ruby-2.6.8-jemalloc fullstaq-ruby-2.7.4-jemalloc fullstaq-ruby-3.0.2-jemalloc
+RUN apt-get install -y fullstaq-ruby-2.6.9-jemalloc fullstaq-ruby-2.7.5-jemalloc fullstaq-ruby-3.0.3-jemalloc fullstaq-ruby-3.1.0-jemalloc
 
 # Enable nginx
 RUN rm -f /etc/service/nginx/down
