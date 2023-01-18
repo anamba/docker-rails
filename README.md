@@ -16,15 +16,15 @@ Primary use cases:
 
 Includes:
 
-* MRI Ruby 3.1.0 + Rubygems 3.3.5
-* MRI Ruby 3.0.3 + Rubygems 3.3.5
-* MRI Ruby 2.7.5 + Rubygems 3.3.5
-* MRI Ruby 2.6.9 + Rubygems 3.3.5
-* Fullstaq Ruby 3.1.0
-* Fullstaq Ruby 3.0.3
-* Fullstaq Ruby 2.7.5
-* Fullstaq Ruby 2.6.9
-* Passenger 6.0.12
+* MRI Ruby 3.2.0 + Rubygems 3.4.4
+* MRI Ruby 3.1.3 + Rubygems 3.4.4
+* MRI Ruby 3.0.5 + Rubygems 3.4.4
+* MRI Ruby 2.7.7 + Rubygems 3.4.4
+* Fullstaq Ruby 3.2.0
+* Fullstaq Ruby 3.1.3
+* Fullstaq Ruby 3.0.5
+* Fullstaq Ruby 2.7.7
+* Passenger 6.0.16
 * Node 16 + yarn
 * rvm stable
 
@@ -34,6 +34,7 @@ Working dir is `/home/app/myapp` (user is `app`).
 
 Versioning originally followed passenger-docker, but no longer.
 
+1.5: Added Ruby 3.2, removed 2.6
 1.4: Added Ruby 3.1, removed 2.5
 1.3: Added Ruby 3.0, removed 2.4; Node 14 -> 16
 1.2: Bionic -> Focal; Node 12 -> 14
@@ -54,7 +55,7 @@ version: '3'
 
 services:
   web:
-    image: anamba/rails-dev:1.4
+    image: anamba/rails-dev:1.5
     volumes:
       - ./:/home/app/myapp
       - /home/app/myapp/log                        # you probably want to keep log and tmp in volumes
@@ -87,7 +88,14 @@ You'll want to create aliases or simple shell scripts to save yourself some typi
 
 ```bash
 docker build --no-cache -t anamba/rails-dev:latest .
-docker tag anamba/rails-dev:latest anamba/rails-dev:1.4.0
-docker tag anamba/rails-dev:latest anamba/rails-dev:1.4
-docker push anamba/rails-dev
+
+# optional: test and make sure everything is installed as expected
+docker run -it anamba/rails-dev:latest bash
+
+docker tag anamba/rails-dev:latest anamba/rails-dev:1.5.0
+docker tag anamba/rails-dev:latest anamba/rails-dev:1.5
+docker push anamba/rails-dev:latest
+
+docker push anamba/rails-dev:1.5.0
+docker push anamba/rails-dev:1.5
 ```
