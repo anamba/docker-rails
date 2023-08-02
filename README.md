@@ -1,6 +1,6 @@
 # docker-rails - Docker image for Rails development
 
-[![Version](https://img.shields.io/github/tag/anamba/docker-rails.svg?maxAge=360)](https://github.com/anamba/docker-rails/releases/latest)
+[![Version](https://img.shields.io/github/tag/anamba/docker-rails.svg?maxAge=360)](https://github.com/anamba/docker-rails/tags)
 [![License](https://img.shields.io/github/license/anamba/docker-rails.svg)](https://github.com/anamba/docker-rails/blob/master/LICENSE)
 
 Docker Hub: [anamba/rails-dev](https://hub.docker.com/r/anamba/rails-dev/)
@@ -16,16 +16,16 @@ Primary use cases:
 
 Includes:
 
-* MRI Ruby 3.2.0 + Rubygems 3.4.4
-* MRI Ruby 3.1.3 + Rubygems 3.4.4
-* MRI Ruby 3.0.5 + Rubygems 3.4.4
-* MRI Ruby 2.7.7 + Rubygems 3.4.4
-* Fullstaq Ruby 3.2.0
-* Fullstaq Ruby 3.1.3
-* Fullstaq Ruby 3.0.5
-* Fullstaq Ruby 2.7.7
-* Passenger 6.0.16
-* Node 16 + yarn
+* MRI Ruby 3.2.2 + Rubygems 3.4.4
+* MRI Ruby 3.1.4 + Rubygems 3.4.4
+* MRI Ruby 3.0.6 + Rubygems 3.4.4
+* MRI Ruby 2.7.8 + Rubygems 3.4.4
+* Fullstaq Ruby 3.2.2
+* Fullstaq Ruby 3.1.4
+* Fullstaq Ruby 3.0.6
+* Fullstaq Ruby 2.7.8
+* Passenger 6.0.18
+* Node 18 + yarn
 * rvm stable
 
 Working dir is `/home/app/myapp` (user is `app`).
@@ -34,7 +34,7 @@ Working dir is `/home/app/myapp` (user is `app`).
 
 Versioning originally followed passenger-docker, but no longer.
 
-1.5: Added Ruby 3.2, removed 2.6
+1.5: Added Ruby 3.2, removed 2.6; Node 16 -> 18
 1.4: Added Ruby 3.1, removed 2.5
 1.3: Added Ruby 3.0, removed 2.4; Node 14 -> 16
 1.2: Bionic -> Focal; Node 12 -> 14
@@ -90,12 +90,12 @@ You'll want to create aliases or simple shell scripts to save yourself some typi
 docker build --no-cache -t anamba/rails-dev:latest .
 
 # optional: test and make sure everything is installed as expected
-docker run -it anamba/rails-dev:latest bash
+docker run -it anamba/rails-dev:latest bash -l
 
-docker tag anamba/rails-dev:latest anamba/rails-dev:1.5.0
+docker tag anamba/rails-dev:latest anamba/rails-dev:1.5.2
 docker tag anamba/rails-dev:latest anamba/rails-dev:1.5
 docker push anamba/rails-dev:latest
 
-docker push anamba/rails-dev:1.5.0
+docker push anamba/rails-dev:1.5.2
 docker push anamba/rails-dev:1.5
 ```
