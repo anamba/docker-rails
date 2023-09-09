@@ -35,7 +35,7 @@ Working dir is `/home/app/myapp` (user is `app`).
 
 Versioning originally followed passenger-docker, but no longer.
 
-1.4.1: Added Ruby 3.2, removed 2.6
+1.4.1: Added Ruby 3.2
 1.4: Added Ruby 3.1, removed 2.5
 1.3: Added Ruby 3.0, removed 2.4; Node 14 -> 16
 1.2: Bionic -> Focal; Node 12 -> 14
@@ -89,7 +89,12 @@ You'll want to create aliases or simple shell scripts to save yourself some typi
 
 ```bash
 docker build --no-cache -t anamba/rails-dev:latest .
-docker tag anamba/rails-dev:latest anamba/rails-dev:1.4.1
-docker tag anamba/rails-dev:latest anamba/rails-dev:1.4
-docker push anamba/rails-dev
+
+# optional: test and make sure everything is installed as expected
+docker run -it anamba/rails-dev:1.4 bash -l
+
+docker tag anamba/rails-dev:latest anamba/rails-dev:1.4.2
+
+docker push anamba/rails-dev:1.4.2
+docker push anamba/rails-dev:1.4
 ```
