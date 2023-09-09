@@ -16,16 +16,16 @@ Primary use cases:
 
 Includes:
 
-* MRI Ruby 3.2.2 + Rubygems 3.4.4
-* MRI Ruby 3.1.4 + Rubygems 3.4.4
-* MRI Ruby 3.0.6 + Rubygems 3.4.4
-* MRI Ruby 2.7.8 + Rubygems 3.4.4
+* MRI Ruby 3.2.2 + Rubygems 3.4.19
+* MRI Ruby 3.1.4 + Rubygems 3.4.19
+* MRI Ruby 3.0.6 + Rubygems 3.4.19
+* MRI Ruby 2.7.8 + Rubygems 3.4.19
 * Fullstaq Ruby 3.2.2
 * Fullstaq Ruby 3.1.4
 * Fullstaq Ruby 3.0.6
 * Fullstaq Ruby 2.7.8
 * Passenger 6.0.18
-* Node 18 + yarn
+* Node 18 + yarn (if you need Node 16, use the latest 1.4 version)
 * rvm stable
 
 Working dir is `/home/app/myapp` (user is `app`).
@@ -35,6 +35,7 @@ Working dir is `/home/app/myapp` (user is `app`).
 Versioning originally followed passenger-docker, but no longer.
 
 1.5: Added Ruby 3.2, removed 2.6; Node 16 -> 18
+1.4.1: Added Ruby 3.2
 1.4: Added Ruby 3.1, removed 2.5
 1.3: Added Ruby 3.0, removed 2.4; Node 14 -> 16
 1.2: Bionic -> Focal; Node 12 -> 14
