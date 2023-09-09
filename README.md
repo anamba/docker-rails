@@ -88,13 +88,13 @@ You'll want to create aliases or simple shell scripts to save yourself some typi
 (notes for myself)
 
 ```bash
-docker build --no-cache -t anamba/rails-dev:latest .
+docker build --no-cache -t anamba/rails-dev:1.4 .
 
 # optional: test and make sure everything is installed as expected
 docker run -it anamba/rails-dev:1.4 bash -l
 
-docker tag anamba/rails-dev:latest anamba/rails-dev:1.4.2
+docker tag anamba/rails-dev:1.4 anamba/rails-dev:1.4.2
 
-docker push anamba/rails-dev:1.4.2
 docker push anamba/rails-dev:1.4
+docker push anamba/rails-dev:1.4.2
 ```
