@@ -16,15 +16,16 @@ Primary use cases:
 
 Includes:
 
-* MRI Ruby 3.1.0 + Rubygems 3.3.5
-* MRI Ruby 3.0.3 + Rubygems 3.3.5
-* MRI Ruby 2.7.5 + Rubygems 3.3.5
-* MRI Ruby 2.6.9 + Rubygems 3.3.5
-* Fullstaq Ruby 3.1.0
-* Fullstaq Ruby 3.0.3
-* Fullstaq Ruby 2.7.5
-* Fullstaq Ruby 2.6.9
-* Passenger 6.0.12
+* MRI Ruby 3.2.2 + Rubygems 3.4.19
+* MRI Ruby 3.1.4 + Rubygems 3.4.19
+* MRI Ruby 3.0.6 + Rubygems 3.4.19
+* MRI Ruby 2.7.8 + Rubygems 3.4.19
+* MRI Ruby 2.6.9 + Rubygems 3.4.19
+* Fullstaq Ruby 3.2.2
+* Fullstaq Ruby 3.1.4
+* Fullstaq Ruby 3.0.6
+* Fullstaq Ruby 2.7.8
+* Passenger 6.0.18
 * Node 16 + yarn
 * rvm stable
 
@@ -34,6 +35,7 @@ Working dir is `/home/app/myapp` (user is `app`).
 
 Versioning originally followed passenger-docker, but no longer.
 
+1.4.1: Added Ruby 3.2, removed 2.6
 1.4: Added Ruby 3.1, removed 2.5
 1.3: Added Ruby 3.0, removed 2.4; Node 14 -> 16
 1.2: Bionic -> Focal; Node 12 -> 14
@@ -87,7 +89,7 @@ You'll want to create aliases or simple shell scripts to save yourself some typi
 
 ```bash
 docker build --no-cache -t anamba/rails-dev:latest .
-docker tag anamba/rails-dev:latest anamba/rails-dev:1.4.0
+docker tag anamba/rails-dev:latest anamba/rails-dev:1.4.1
 docker tag anamba/rails-dev:latest anamba/rails-dev:1.4
 docker push anamba/rails-dev
 ```

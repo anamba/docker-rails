@@ -1,10 +1,12 @@
 # See https://github.com/phusion/passenger-docker/blob/master/CHANGELOG.md for a list of version numbers.
-FROM phusion/passenger-full:2.0.1
+FROM phusion/passenger-full:2.5.1
 LABEL maintainer="bbsoftware@biggerbird.com"
 
 # Set up 3rd party repos
-RUN apt-get update; apt-get install ca-certificates
-RUN curl -sL https://deb.nodesource.com/setup_16.x | bash -
+RUN apt-get update; apt-get install -y ca-certificates curl gnupg
+RUN mkdir -p /etc/apt/keyrings
+RUN curl -fsSL https://deb.nodesource.com/gpgkey/nodesource-repo.gpg.key | gpg --dearmor -o /etc/apt/keyrings/nodesource.gpg
+RUN echo "deb [signed-by=/etc/apt/keyrings/nodesource.gpg] https://deb.nodesource.com/node_16.x nodistro main" > /etc/apt/sources.list.d/nodesource.list
 RUN curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add -
 RUN echo "deb https://dl.yarnpkg.com/debian/ stable main" > /etc/apt/sources.list.d/yarn.list
 RUN apt-get update
@@ -23,16 +25,21 @@ RUN /usr/local/rvm/bin/rvm get stable
 RUN /usr/local/rvm/bin/rvm cleanup all
 
 # Update rubygems and install/update bundler
-RUN bash -l -c "rvm use 3.1.0 --install && gem update --system && gem install bundler"
-RUN bash -l -c "rvm use 3.0.3 --install && gem update --system && gem install bundler"
-RUN bash -l -c "rvm use 2.7.5 --install && gem update --system && gem install bundler"
-RUN bash -l -c "rvm use 2.6.9 --install && gem update --system && gem install bundler"
+RUN bash -l -c "rvm use 3.2.2 --install && gem update --system && gem install bundler"
+RUN bash -l -c "rvm use 3.1.4 --install && gem update --system && gem install bundler"
+RUN bash -l -c "rvm use 3.0.6 --install && gem update --system && gem install bundler"
+RUN bash -l -c "rvm use 2.7.8 --install && gem update --system && gem install bundler"
+RUN bash -l -c "rvm use 2.6.10 --install && gem update --system && gem install bundler"
 
-# Add fullstaq ruby repo and install ruby2.6/2.7/3.0
+# Add fullstaq ruby repo and install target versions
 RUN curl -sSL https://raw.githubusercontent.com/fullstaq-labs/fullstaq-ruby-server-edition/main/fullstaq-ruby.asc | apt-key add -
 RUN echo "deb https://apt.fullstaqruby.org ubuntu-20.04 main" > /etc/apt/sources.list.d/fullstaq-ruby.list
 RUN apt-get update
-RUN apt-get install -y fullstaq-ruby-2.6.9-jemalloc fullstaq-ruby-2.7.5-jemalloc fullstaq-ruby-3.0.3-jemalloc fullstaq-ruby-3.1.0-jemalloc
+RUN apt-get install -y fullstaq-ruby-common
+RUN apt-get install -y fullstaq-ruby-3.2.2-jemalloc
+RUN apt-get install -y fullstaq-ruby-3.1.4-jemalloc
+RUN apt-get install -y fullstaq-ruby-3.0.6-jemalloc
+RUN apt-get install -y fullstaq-ruby-2.7.8-jemalloc
 
 # Enable nginx
 RUN rm -f /etc/service/nginx/down
