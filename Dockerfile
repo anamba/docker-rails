@@ -35,7 +35,7 @@ RUN /usr/local/rvm/bin/rvm cleanup all
 RUN bash -l -c "rvm use 3.2.2 --install && gem update --system && gem install bundler"
 RUN bash -l -c "rvm use 3.1.4 --install && gem update --system && gem install bundler"
 RUN bash -l -c "rvm use 3.0.6 --install && gem update --system && gem install bundler"
-RUN bash -l -c "rvm use 2.7.8 --install && gem update --system && gem install bundler"
+RUN bash -l -c "rvm use 2.7.8 --install && gem install rubygems-update -v 3.4.22 && gem install bundler -v 2.4.22"
 
 # Add fullstaq versions
 RUN apt-get install -y fullstaq-ruby-common
