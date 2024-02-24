@@ -1,13 +1,11 @@
 # See https://github.com/phusion/passenger-docker/blob/master/CHANGELOG.md for a list of version numbers.
-FROM phusion/passenger-full:2.5.1
+# 2.5.0 is the last one that uses Node 16
+FROM phusion/passenger-full:2.5.0
 LABEL maintainer="bbsoftware@biggerbird.com"
 
 # Set up 3rd party repos
 RUN apt-get update; apt-get install -y ca-certificates curl gnupg
 RUN mkdir -p /etc/apt/keyrings
-# nodesource
-RUN curl -fsSL https://deb.nodesource.com/gpgkey/nodesource-repo.gpg.key | gpg --dearmor -o /etc/apt/keyrings/nodesource.gpg
-RUN echo "deb [signed-by=/etc/apt/keyrings/nodesource.gpg] https://deb.nodesource.com/node_16.x nodistro main" > /etc/apt/sources.list.d/nodesource.list
 # yarn
 RUN curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add -
 RUN echo "deb https://dl.yarnpkg.com/debian/ stable main" > /etc/apt/sources.list.d/yarn.list
@@ -35,8 +33,8 @@ RUN /usr/local/rvm/bin/rvm cleanup all
 RUN bash -l -c "rvm use 3.2.2 --install && gem update --system && gem install bundler"
 RUN bash -l -c "rvm use 3.1.4 --install && gem update --system && gem install bundler"
 RUN bash -l -c "rvm use 3.0.6 --install && gem update --system && gem install bundler"
-RUN bash -l -c "rvm use 2.7.8 --install && gem update --system && gem install bundler"
-RUN bash -l -c "rvm use 2.6.10 --install && gem update --system && gem install bundler"
+RUN bash -l -c "rvm use 2.7.8 --install && gem install rubygems-update -v 3.4.22 && gem install bundler -v 2.4.22"
+RUN bash -l -c "rvm use 2.6.10 --install && gem install rubygems-update -v 3.4.22 && gem install bundler -v 2.4.22"
 
 # Add fullstaq versions
 RUN apt-get install -y fullstaq-ruby-common
